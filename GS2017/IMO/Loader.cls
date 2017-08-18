@@ -41,7 +41,7 @@ ClassMethod loadprobdefaults(File As %String) As %Integer
 		set lexLine=$piece(line,",",2,99)
 		set lexTitle=$piece(lexLine,"""",2)
 		set varId=$tr($piece(lexLine,"""",3),",","")
-		if (cnt'=0),(oldLex=lexTitle) { continue }
+		if (cnt'=0),(oldLex=lexTitle) { continue } ;Skip duplicate Lexical Titles.
 		;if cnt=0 { set cnt=$increment(cnt) continue }
 		&sql(insert into GS2017.Loader (Type,LexicalId,SourceLine) values ('Default Problem',:lexId,:lexTitle))
 		if SQLCODE'=0 { set ^%jks($i(^%jks))="SQLCODE="_SQLCODE_" lexTitle="_lexTitle }
